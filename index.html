@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>أذكار الصباح والمساء</title>
+
+<style>
+
+body{
+    margin:0;
+    padding:0;
+    background:linear-gradient(to bottom,#0f172a,#1e293b);
+    font-family:Tahoma,sans-serif;
+    color:white;
+    line-height:2;
+}
+
+.container{
+    width:90%;
+    max-width:900px;
+    margin:auto;
+    padding:30px 15px;
+}
+
+.title{
+    text-align:center;
+    font-size:40px;
+    margin-bottom:40px;
+    color:#e4f318;
+}
+
+.zekr{
+    background:rgba(255,255,255,0.08);
+    padding:20px;
+    margin-bottom:20px;
+    border-radius:20px;
+    box-shadow:0 0 10px rgba(0,0,0,0.3);
+    transition:0.3s;
+    font-size:22px;
+    text-align:center;
+}
+
+.zekr:hover{
+    transform:scale(1.02);
+    background:rgba(255,255,255,0.12);
+}
+
+.buttons{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    justify-content:center;
+    margin-top:15px;
+}
+
+.counter{
+    background:#facc15;
+    color:black;
+    border:none;
+    padding:10px 20px;
+    border-radius:12px;
+    font-size:20px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+.counter:hover{
+    transform:scale(1.08);
+}
+
+.finished{
+    background:#22c55e !important;
+    color:white;
+}
+
+.disabled{
+    opacity:0.5;
+    pointer-events:none;
+}
+
+.footer{
+    text-align:center;
+    margin-top:40px;
+    font-size:24px;
+    color:#86efac;
+}
+
+.reset-btn{
+    position:fixed;
+    bottom:20px;
+    left:20px;
+    background:#ef4444;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:15px;
+    cursor:pointer;
+    font-size:18px;
+    font-weight:bold;
+}
+
+.progress-container{
+    width:100%;
+    background:rgba(255,255,255,0.1);
+    border-radius:20px;
+    overflow:hidden;
+    margin-bottom:30px;
+    height:30px;
+}
+
+.progress-bar{
+    height:100%;
+    width:0%;
+    background:#22c55e;
+    text-align:center;
+    line-height:30px;
+    font-weight:bold;
+    transition:0.4s;
+}
+
+.done-message{
+    text-align:center;
+    font-size:28px;
+    color:#22c55e;
+    margin-top:30px;
+    display:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1 class="title">🌿 أذكار الصباح والمساء 🌿</h1>
+    <div class="progress-container">
+
+    <div class="progress-bar" id="progressBar">
+        0%
+    </div>
+
+</div>
+
+    <div class="zekr">
+{ ٱللَّهُ لَاۤ إِلَـٰهَ إِلَّا هُوَ ٱلۡحَیُّ ٱلۡقَیُّومُۚ لَا تَأۡخُذُهُۥ سِنَةࣱ وَلَا نَوۡمࣱۚ لَّهُۥ مَا فِی ٱلسَّمَـٰوَ ٰ⁠تِ وَمَا فِی ٱلۡأَرۡضِۗ مَن ذَا ٱلَّذِی یَشۡفَعُ عِندَهُۥۤ إِلَّا بِإِذۡنِهِۦۚ یَعۡلَمُ مَا بَیۡنَ أَیۡدِیهِمۡ وَمَا خَلۡفَهُمۡۖ وَلَا یُحِیطُونَ بِشَیۡءࣲ مِّنۡ عِلۡمِهِۦۤ إِلَّا بِمَا شَاۤءَۚ وَسِعَ كُرۡسِیُّهُ ٱلسَّمَـٰوَ ٰ⁠تِ وَٱلۡأَرۡضَۖ وَلَا یَـُٔودُهُۥ حِفۡظُهُمَاۚ وَهُوَ ٱلۡعَلِیُّ ٱلۡعَظِیمُ }
+[سُورَةُ البَقَرَةِ: ٢٥٥]        <br>
+        <button class="counter" data-start="1">1</button>
+    </div>
+
+    <div class="zekr">
+       { قُلۡ هُوَ ٱللَّهُ أَحَدٌ (١) ٱللَّهُ ٱلصَّمَدُ (٢) لَمۡ یَلِدۡ وَلَمۡ یُولَدۡ (٣) وَلَمۡ یَكُن لَّهُۥ كُفُوًا أَحَدُۢ (٤) }
+[سُورَةُ الإِخۡلَاصِ: ١-٤]
+        <br>
+        <button class="counter" data-start="3">3</button>
+    </div>
+<div class="zekr">
+{ قُلۡ أَعُوذُ بِرَبِّ ٱلۡفَلَقِ (١) مِن شَرِّ مَا خَلَقَ (٢) وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ (٣) وَمِن شَرِّ ٱلنَّفَّـٰثَـٰتِ فِی ٱلۡعُقَدِ (٤) وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ (٥) }
+[سُورَةُ الفَلَقِ: ١-٥]        <br>
+        <button class="counter" data-start="3">3</button>
+    </div>
+    <div class="zekr">
+{ قُلۡ أَعُوذُ بِرَبِّ ٱلنَّاسِ (١) مَلِكِ ٱلنَّاسِ (٢) إِلَـٰهِ ٱلنَّاسِ (٣) مِن شَرِّ ٱلۡوَسۡوَاسِ ٱلۡخَنَّاسِ (٤) ٱلَّذِی یُوَسۡوِسُ فِی صُدُورِ ٱلنَّاسِ (٥) مِنَ ٱلۡجِنَّةِ وَٱلنَّاسِ (٦) }
+[سُورَةُ النَّاسِ: ١-٦]        <br>
+        <button class="counter" data-start="3">3</button>
+    </div>
+
+    <div class="zekr">
+        اللهم أنت ربي لا إله إلا أنت، خلقتني وأنا عبدك،
+        وأنا على عهدك ووعدك ما استطعت،
+        أعوذ بك من شر ما صنعت،
+        أبوء لك بنعمتك عليّ،
+        وأبوء بذنبي فاغفر لي،
+        فإنه لا يغفر الذنوب إلا أنت.
+        <br>
+        <button class="counter" data-start="3">1</button>
+    </div>
+
+    <div class="zekr">
+        سبحان الله وبحمده عدد خلقه ورضا نفسه
+        وزنة عرشه ومداد كلماته.
+        <br>
+        <button class="counter" data-start="3">3</button>
+    </div>
+
+    <div class="zekr">
+        بسم الله الذي لا يضر مع اسمه شيء
+        في الأرض ولا في السماء وهو السميع العليم.
+        <br>
+        <button class="counter" data-start="3">3</button>
+    </div>
+
+    <div class="zekr">
+        أعوذ بكلمات الله التامات من شر ما خلق.
+        <br>
+        <button class="counter" data-start="3">3</button>
+    </div>
+
+    <div class="zekr">
+        رضيت بالله ربًا وبالإسلام دينًا
+        وبمحمد ﷺ رسولًا.
+        <br>
+        <button class="counter" data-start="3">3</button>
+    </div>
+        <div class="zekr">
+        اللهم عافني في بدني،
+        اللهم عافني في سمعي،
+        اللهم عافني في بصري،
+        لا إله إلا أنت،
+        اللهم إني أعوذ بك من الكفر والفقر،
+        وأعوذ بك من عذاب القبر
+           لا إله إلا أنت. <BR>
+           <button class="counter" data-start="3">3</button>
+    </div>
+
+    <div class="zekr">
+        أصبحنا على فطرة الإسلام،
+        وعلى كلمة الإخلاص،
+        وعلى دين نبينا محمد ﷺ،
+        وعلى ملة أبينا إبراهيم حنيفًا مسلمًا
+        وما كان من المشركين.
+        <br>
+        <button class="counter" data-start="3">1</button>
+    </div>
+
+    <div class="zekr">
+        اللهم فاطر السماوات والأرض
+        عالم الغيب والشهادة،
+        رب كل شيء ومليكه،
+        أشهد أن لا إله إلا أنت،
+        أعوذ بك من شر نفسي
+        ومن شر الشيطان وشركه،
+        وأن أقترف على نفسي سوءًا
+        أو أجره إلى مسلم.
+        <br>
+        <button class="counter" data-start="3">1</button>
+    </div>
+
+    <div class="zekr">
+        أصبحنا وأصبح الملك لله والحمد لله،
+        لا إله إلا الله وحده لا شريك له،
+        له الملك وله الحمد وهو على كل شيء قدير،
+        رب أسألك خير هذا اليوم وخير ما بعده،
+        وأعوذ بك من شر هذا اليوم وشر ما بعده،
+        رب أعوذ بك من الكسل وسوء الكبر،
+        رب أعوذ بك من عذاب في النار
+        وعذاب في القبر.
+        <br>
+        <button class="counter" data-start="3">1</button>
+    </div>
+
+    <div class="zekr">
+        اللهم بك أصبحنا وبك أمسينا
+        وبك نحيا وبك نموت وإليك المصير.
+        <br>
+        <button class="counter" data-start="3">1</button>
+    </div>
+
+    <div class="zekr">
+        اللهم إني أعوذ بك من الهم والحزن،
+        وأعوذ بك من العجز والكسل،
+        وأعوذ بك من الجبن والبخل،
+        وأعوذ بك من غلبة الدين وقهر الرجال.
+        <br>
+        <button class="counter" data-start="3">1</button>
+    </div>
+            <div class="zekr">
+يا حي يا قيوم برحمتك أستغيث أصلح لي شأني كله ولا تكلني إلي نفسي طرفة عين         <br>
+<br>
+        <button class="counter" data-start="3">1</button>
+    </div>
+<div class="zekr">
+
+
+سبحان الله وبحمده
+
+<div class="buttons">
+
+<button class="counter" data-start="100" data-group="17">100</button>
+</div>
+</div>
+
+<!-- 18 -->
+<div class="zekr">
+
+لا إله إلا الله وحده لا شريك له
+له الملك وله الحمد 
+وهو علي كل شئ قدير 
+
+<div class="buttons">
+
+<button class="counter" data-start="100" data-group="18">100</button>
+<button class="counter" data-start="10" data-group="18">10</button>
+
+</div>
+</div>
+
+<!-- 19 -->
+<div class="zekr">
+
+أستغفر الله وأتوب إليه
+
+<div class="buttons">
+
+<button class="counter" data-start="100" data-group="19">100</button>
+<button class="counter" data-start="10" data-group="19">10</button>
+
+</div>
+</div>
+
+<!-- 20 -->
+<div class="zekr">
+
+اللهم صل وسلم وبارك على نبينا محمد ﷺ
+
+<div class="buttons">
+
+<button class="counter" data-start="100" data-group="20">100</button>
+<button class="counter" data-start="10" data-group="20">10</button>
+
+</div>
+</div>
+
+<div class="done-message" id="doneMessage">
+🤍 ألف مبروووووووووووووك <br>
+🤍 تقبل الله منا ومنكم صالح الأعمال <br>
+
+</div>
+
+<div class="footer">
+🤍 لا تنسنا من صالح دعائك 🤍
+</div>
+
+</div>
+
+<button class="reset-btn" onclick="resetCounters()">
+إعادة العد
+</button>
+
+<script>
+
+let counters = document.querySelectorAll(".counter");
+
+counters.forEach(button => {
+
+    button.addEventListener("click", function () {
+
+        if(this.classList.contains("disabled")) return;
+
+        let current = parseInt(this.innerText);
+
+        let group = this.getAttribute("data-group");
+
+        let groupButtons =
+        document.querySelectorAll(`[data-group="${group}"]`);
+
+        groupButtons.forEach(btn => {
+
+            if(btn !== this &&
+               !btn.classList.contains("finished")){
+
+                btn.classList.add("disabled");
+
+            }
+
+        });
+
+        if(current > 0){
+
+            current--;
+
+            this.innerText = current;
+
+        }
+
+        if(current == 0){
+
+            this.classList.add("finished");
+
+            let zekrBox = this.closest(".zekr");
+
+            zekrBox.style.transition = "0.5s";
+
+            zekrBox.style.opacity = "0";
+
+            zekrBox.style.transform = "scale(0.9)";
+
+            setTimeout(() => {
+
+                zekrBox.style.display = "none";
+
+                updateProgress();
+
+            }, 500);
+
+        }
+
+    });
+
+});
+
+function resetCounters(){
+
+    counters.forEach(button => {
+
+        let start = button.getAttribute("data-start");
+
+        button.innerText = start;
+
+        button.classList.remove("finished");
+
+        button.classList.remove("disabled");
+
+    });
+
+    document.querySelectorAll(".zekr").forEach(zekr => {
+
+        zekr.style.display = "block";
+        zekr.style.opacity = "1";
+        zekr.style.transform = "scale(1)";
+
+    });
+
+    document.getElementById("doneMessage")
+    .style.display = "none";
+
+    updateProgress();
+}
+
+function updateProgress(){
+
+    let total = document.querySelectorAll(".zekr").length;
+
+    let hidden =
+    document.querySelectorAll(".zekr[style*='display: none']").length;
+
+    let percent = Math.round((hidden / total) * 100);
+
+    let bar = document.getElementById("progressBar");
+
+    bar.style.width = percent + "%";
+
+    bar.innerText = percent + "%";
+
+    if(hidden === total){
+
+        document.getElementById("doneMessage")
+        .style.display = "block";
+
+    }
+}
+
+updateProgress();
+
+if('serviceWorker' in navigator){
+    navigator.serviceWorker.register("sw.js");
+}
+
+</script>
+
+</body>
+</html>
